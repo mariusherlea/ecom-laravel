@@ -17,6 +17,7 @@ class CreateItemOrderTable extends Migration
             $table->id();
             $table->integer('item_id')->unsigned()->nullable()->index();
             $table->integer('order_id')->unsigned()->nullable()->index();
+            $table->double('quantity')->default();
             $table->timestamps();
         });
     }

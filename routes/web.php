@@ -20,25 +20,35 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Account
 Route::get('/createAccount/{name}/{email}', function ($name,$email){
 $account=new Account(['name'=>$name, 'email'=>$email]);
 $account->save();
 });
 
-
-Route::get('/createOrder', function (){
-    $account=Account::findOrFail(1);
+//Order
+Route::get('/createOrder/{accountId}', function ($accountId){
+    $account=Account::findOrFail($accountId);
     $account->orders()->save(new Order());
 });
 
+//Item
 Route::get('/createItem/{name}/{price}/{stock}', function ($name,$price,$stock){
     $item=new Item(['name'=>$name, 'price'=>$price, 'stock'=>$stock]);
     $item->save();
 });
 
+//Item to order
+Route::get('/addItemToOrder/{orderId}/{itemId}/{quantity}', function ($orderId,$itemId,$quantity){
+    $order=Order::find($orderId);
+    $item=Item::find($itemId);
+    $order->relations()->save($item, ['quantity'=>$quantity]);
+});
 
-Route::get('/addItemToOrder', function (){
-    $order=Order::find(1);
-    $item=Item::find(1);
-    $order->items()->save($item);
+Route::get('/read/{orderId}',function ($orderId){
+   $order = Order::findOrFail($orderId);
+   foreach ($order->items as $item){
+       echo($item->name).' ';
+       echo ($item->price);
+   }
 });

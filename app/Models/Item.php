@@ -14,4 +14,8 @@ class Item extends Model
       'price',
       'stock'
     ];
+
+    public function relations(){
+        return $this->belongsToMany(Order::class)->withPivot('quantity');
+    }
 }

@@ -9,8 +9,8 @@ class Order extends Model
 {
     use HasFactory;
 
-public function items(){
-    return $this->belongsToMany(Item::class);
+public function relations(){
+    return $this->belongsToMany(Item::class)->withPivot('quantity');
 }
 
 }
