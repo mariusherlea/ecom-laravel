@@ -41,10 +41,10 @@ Route::get('/createItem/{name}/{price}/{stock}', function ($name, $price, $stock
 //Item to order
 
 
-Route::get('/addItemToOrder/{orderId}/{itemId}', function ($orderId, $itemId) {
+Route::get('/addItemToOrder/{orderId}/{itemId}/{qt}', function ($orderId, $itemId,$qt) {
     $order = Order::find($orderId);
     $item = Item::find($itemId);
-    $order->items()->attach($item, ['qt' => 12]);
+    $order->items()->attach($item, ['qt' => $qt]);
 });
 
 Route::get('/read/{orderId}', function ($orderId) {
@@ -52,7 +52,7 @@ Route::get('/read/{orderId}', function ($orderId) {
     foreach ($order->items as $item) {
         echo ($item->name) . ' ';
         echo ($item->price) . ' ';
-        echo($item->pivot->qt);
+        echo($item->pivot->qt).'<br>';
 
     }
 });
