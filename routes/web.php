@@ -21,34 +21,66 @@ Route::get('/', function () {
 });
 
 //Account
-Route::get('/createAccount/{name}/{email}', function ($name,$email){
-$account=new Account(['name'=>$name, 'email'=>$email]);
-$account->save();
+Route::get('/createAccount/{name}/{email}', function ($name, $email) {
+    $account = new Account(['name' => $name, 'email' => $email]);
+    $account->save();
 });
 
 //Order
-Route::get('/createOrder/{accountId}', function ($accountId){
-    $account=Account::findOrFail($accountId);
+Route::get('/createOrder/{accountId}', function ($accountId) {
+    $account = Account::findOrFail($accountId);
     $account->orders()->save(new Order());
 });
 
 //Item
-Route::get('/createItem/{name}/{price}/{stock}', function ($name,$price,$stock){
-    $item=new Item(['name'=>$name, 'price'=>$price, 'stock'=>$stock]);
+Route::get('/createItem/{name}/{price}/{stock}', function ($name, $price, $stock) {
+    $item = new Item(['name' => $name, 'price' => $price, 'stock' => $stock]);
     $item->save();
 });
 
 //Item to order
-Route::get('/addItemToOrder/{orderId}/{itemId}/{quantity}', function ($orderId,$itemId,$quantity){
-    $order=Order::find($orderId);
-    $item=Item::find($itemId);
-    $order->relations()->save($item, ['quantity'=>$quantity]);
+
+
+Route::get('/addItemToOrder/{orderId}/{itemId}', function ($orderId, $itemId) {
+    $order = Order::find($orderId);
+    $item = Item::find($itemId);
+    $order->items()->attach($item, ['qt' => 12]);
 });
 
-Route::get('/read/{orderId}',function ($orderId){
-   $order = Order::findOrFail($orderId);
-   foreach ($order->items as $item){
-       echo($item->name).' ';
-       echo ($item->price);
-   }
+Route::get('/read/{orderId}', function ($orderId) {
+    $order = Order::findOrFail($orderId);
+    foreach ($order->items as $item) {
+        echo ($item->name) . ' ';
+        echo ($item->price) . ' ';
+        echo($item->pivot->qt);
+
+    }
 });
+
+/*Route::get('/update/{orderId}', function ($orderId) {
+    $order = Order::findOrFail($orderId);
+
+    if ($order->has('items')) {
+        foreach ($order->items as $item) {
+            if ($item->name == 'ou') {
+
+                $item->name = 'ouale';
+                $item->save();
+            }
+        }
+    }
+});
+
+Route::get('/attach/{itemId}', function ($itemId) {
+    $order = Order::findOrFail(1);
+    $order->items()->attach($itemId);
+});
+Route::get('/detach', function () {
+    $order = Order::findOrFail(1);
+    $order->items()->detach();
+});
+
+Route::get('/sync', function (){
+   $order=Order::findOrFail(1);
+   $order->items()->sync([1,2]);
+});*/
