@@ -47,15 +47,21 @@ Route::get('/addItemToOrder/{orderId}/{itemId}/{qt}', function ($orderId, $itemI
     $order->items()->attach($item, ['qt' => $qt]);
 });
 
-Route::get('/read/{orderId}', function ($orderId) {
-    $order = Order::findOrFail($orderId);
-    foreach ($order->items as $item) {
-        echo ($item->name) . ' ';
-        echo ($item->price) . ' ';
-        echo($item->pivot->qt).'<br>';
+Route::get('/read/{orderId}',
+    function ($orderId) {
+        $order = Order::findOrFail($orderId);
+        static $total = 0;
+        foreach ($order->items as $item) {
+            echo ($item->name) . ' price: ';
+            echo ($item->price) . ' quantity: ';
+            echo ($item->pivot->qt) . ' price: ';
+            $price = (($item->price) * ($item->pivot->qt));
+            echo $price.'<br>';
 
-    }
-});
+            $total = $total + $price;
+        }
+        echo 'ShopCart Total: '.$total;
+    });
 
 /*Route::get('/update/{orderId}', function ($orderId) {
     $order = Order::findOrFail($orderId);
