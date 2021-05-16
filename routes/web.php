@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Models\Account;
 use App\Models\Item;
 use App\Models\Order;
@@ -63,6 +64,11 @@ Route::get('/read/{orderId}',
         echo 'ShopCart Total: '.$total;
     });
 
+
+/*Route::resource('account', AccountController::class);
+
+Route::get('/contact/{id}/{name}', [AccountController::class, 'contact']);*/
+
 /*Route::get('/update/{orderId}', function ($orderId) {
     $order = Order::findOrFail($orderId);
 
@@ -90,3 +96,8 @@ Route::get('/sync', function (){
    $order=Order::findOrFail(1);
    $order->items()->sync([1,2]);
 });*/
+
+Route::resource('account/users',AccountController::class);
+Route::get('/admin', function (){
+    return view('account');
+});
