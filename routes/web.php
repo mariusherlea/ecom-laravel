@@ -97,7 +97,7 @@ Route::get('/sync', function (){
    $order->items()->sync([1,2]);
 });*/
 
-Route::resource('account/users',AccountController::class);
+Route::resource('account',AccountController::class);
 Route::get('/admin', function (){
     return view('account');
 });

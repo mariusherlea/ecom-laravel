@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AccountRequest;
 use App\Models\Account;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class AccountController extends Controller
     {
         //
         $accounts=Account::all();
-        return  view('account', compact('accounts'));
+        return  view('account.index', compact('accounts'));
     }
 
     /**
@@ -27,6 +28,9 @@ class AccountController extends Controller
     public function create()
     {
         //
+
+        return view('account.create');
+
     }
 
     /**
@@ -35,9 +39,10 @@ class AccountController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AccountRequest $request)
     {
         //
+        return $request->all();
     }
 
     /**
@@ -49,7 +54,7 @@ class AccountController extends Controller
     public function show()
     {
         //
-        return "return any shit";
+        return view('account');
 
     }
 
@@ -87,11 +92,7 @@ class AccountController extends Controller
         //
     }
 
-    public function contact($id, $name){
-//        return view('contact')->with('id',$id);
-        return view('account', compact('id','name'));
 
-    }
 
 
 
