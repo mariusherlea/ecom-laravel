@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ItemController;
 use App\Models\Account;
 use App\Models\Item;
 use App\Models\Order;
@@ -42,7 +43,7 @@ Route::get('/createItem/{name}/{price}/{stock}', function ($name, $price, $stock
 //Item to order
 
 
-Route::get('/addItemToOrder/{orderId}/{itemId}/{qt}', function ($orderId, $itemId,$qt) {
+Route::get('/addItemToOrder/{orderId}/{itemId}/{qt}', function ($orderId, $itemId, $qt) {
     $order = Order::find($orderId);
     $item = Item::find($itemId);
     $order->items()->attach($item, ['qt' => $qt]);
@@ -54,14 +55,14 @@ Route::get('/read/{orderId}',
         static $total = 0;
         foreach ($order->items as $item) {
             echo ($item->name) . ' price: ';
-            echo ($item->price) . ' quantity: ';
-            echo ($item->pivot->qt) . ' price: ';
+            echo ($item->price) . '<br>'.' quantity: ';
+            echo ($item->pivot->qt) .'<br>'. ' Item price: ';
             $price = (($item->price) * ($item->pivot->qt));
-            echo $price.'<br>';
+            echo $price . '<br>';
 
             $total = $total + $price;
         }
-        echo 'ShopCart Total: '.$total;
+        echo 'ShopCart Total: ' . $total;
     });
 
 
@@ -97,7 +98,10 @@ Route::get('/sync', function (){
    $order->items()->sync([1,2]);
 });*/
 
-Route::resource('account',AccountController::class);
-Route::get('/admin', function (){
+Route::resource('account', AccountController::class);
+Route::get('/admin', function () {
     return view('account');
 });
+
+Route::resource('item', ItemController::class);
+
