@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OrderController;
 use App\Models\Account;
 use App\Models\Item;
 use App\Models\Order;
@@ -99,9 +100,11 @@ Route::get('/sync', function (){
 });*/
 
 Route::resource('account', AccountController::class);
-Route::get('/admin', function () {
+/*Route::get('/admin', function () {
     return view('account');
-});
+});*/
 
 Route::resource('item', ItemController::class);
 
+
+Route::resource('order', OrderController::class);
