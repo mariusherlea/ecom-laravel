@@ -63,4 +63,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ##Ecommerce API
 
 An Ecommerce API with Laravel and Mysql.
-A scheme of entities as follows: Accounts -> one to many -> Orders -> one to many -> Items. In the pivot table the price of the item is calculated according to the quantity in the basket, and the total price of the order. 
+A scheme of entities as follows: Accounts -> one to many -> Orders -> one to many -> Items. The price of the item is calculated according to the quantity in the basket and the price of item, and the total price of the order is sum of item's price. 
+With controller and views i start to develop a front end.
