@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\OrderRequest;
-use App\Models\Account;
 use App\Models\Item;
+use App\Models\ItemOrder;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class ItemOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +17,9 @@ class OrderController extends Controller
     public function index()
     {
         //
-        $orders = Order::all();
 
-        return view('order.index', compact('orders'));
+        $itemOrders = ItemOrder::all();
+        return view('itemOrder.index', compact('itemOrders'));
     }
 
     /**
@@ -31,8 +30,6 @@ class OrderController extends Controller
     public function create()
     {
         //
-        $accounts = Account::pluck('name','id');
-        return view('order.create', compact('accounts'));
     }
 
     /**
@@ -41,11 +38,9 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OrderRequest $request)
+    public function store(Request $request)
     {
         //
-        Order::create($request->all());
-        return redirect('/order');
     }
 
     /**

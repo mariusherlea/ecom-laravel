@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ItemOrderController;
 use App\Http\Controllers\OrderController;
 use App\Models\Account;
 use App\Models\Item;
@@ -108,3 +109,5 @@ Route::resource('item', ItemController::class);
 
 
 Route::resource('order', OrderController::class);
+
+Route::resource('itemOrder', ItemOrderController::class);
