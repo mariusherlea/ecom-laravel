@@ -21,11 +21,12 @@
     <tbody>
     @if($orders)
 
+
         @foreach($orders as $order)
             <tr>
                 <td>{{$order->id}}</td>
                 <td>{{$order->account_id}}</td>
-                <td>{{$order->calculate($order->id)}}</td>
+                <td>{{$order->calcul($order->id)}}</td>
 
             </tr>
         @endforeach
