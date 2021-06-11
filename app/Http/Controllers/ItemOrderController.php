@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ItemOrdersRequest;
 use App\Models\Item;
 use App\Models\ItemOrder;
 use App\Models\Order;
@@ -30,6 +31,9 @@ class ItemOrderController extends Controller
     public function create()
     {
         //
+        $items = Item::pluck('name','id');
+        $orders=Order::pluck('id');
+        return view('itemOrder.create', compact('items','orders'));
     }
 
     /**
@@ -38,9 +42,12 @@ class ItemOrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ItemOrdersRequest $request)
     {
         //
+return $request->all();
+        /*ItemOrder::create($request->all());
+        return redirect('/itemOrder');*/
     }
 
     /**

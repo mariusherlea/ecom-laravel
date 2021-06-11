@@ -8,7 +8,7 @@
 {!! form::select('account_id',$accounts, null) !!}
 
 
-{!! form::submit('Create Item') !!}
+{!! form::submit('Create Order') !!}
 {!! Form::close() !!}
 
 

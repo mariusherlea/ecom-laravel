@@ -6,7 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-interface Calcul
+interface CalculCart
 {
 function calcul($orderId);
 }

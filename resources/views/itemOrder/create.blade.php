@@ -1,18 +1,18 @@
-<h1>Create Item</h1>
+<h1>A</h1>
 
 
-{!! Form::open(['action' =>'App\Http\Controllers\ItemController@store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+{!! Form::open(['action' =>'App\Http\Controllers\ItemOrderController@store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
 
-{!! form::label('name', 'Name: ') !!}
-{!! form::text('name', null) !!}
+{!! form::label('item_id', 'Item_id: ') !!}
+{!! form::select('item_id',$items, null) !!}
 
-{!! form::label('price', 'Price: ') !!}
-{!! form::number('price', null) !!}
+{!! form::label('order_id', 'Order_id: ') !!}
+{!! form::select('order_id',$orders, null) !!}
 
 {!! form::label('stock', 'Stock: ') !!}
 {!! form::number('stock', null) !!}
 
-{!! form::submit('Create Item') !!}
+{!! form::submit('Add Item to Order') !!}
 {!! Form::close() !!}
 
 
