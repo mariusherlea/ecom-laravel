@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+/*
 //Account
 Route::get('/createAccount/{name}/{email}', function ($name, $email) {
     $account = new Account(['name' => $name, 'email' => $email]);
@@ -68,7 +68,7 @@ Route::get('/read/{orderId}',
     });
 
 
-/*Route::resource('account', AccountController::class);
+Route::resource('account', AccountController::class);
 
 Route::get('/contact/{id}/{name}', [AccountController::class, 'contact']);*/
 
@@ -101,9 +101,7 @@ Route::get('/sync', function (){
 });*/
 
 Route::resource('account', AccountController::class);
-/*Route::get('/admin', function () {
-    return view('account');
-});*/
+
 
 Route::resource('item', ItemController::class);
 

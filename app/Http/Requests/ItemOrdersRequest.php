@@ -27,7 +27,7 @@ class ItemOrdersRequest extends FormRequest
             //
             'order_id'=>'required',
             'item_id'=>'required',
-            'stock'=>'required'
+            'qt'=>'required'
         ];
     }
 }

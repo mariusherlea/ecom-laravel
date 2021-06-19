@@ -8,13 +8,14 @@ class ItemOrder extends Pivot
 {
     //
 
-    protected $fillable=[
-        'item_id',
+    protected $fillable = [
         'order_id',
+        'item_id',
         'qt'
     ];
 
-    static public function create($orderId,$itemId,$qt){
+    static public function create($orderId, $itemId, $qt)
+    {
         $order = Order::find($orderId);
         $item = Item::find($itemId);
         $order->items()->attach($item, ['qt' => $qt]);

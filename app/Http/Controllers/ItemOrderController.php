@@ -31,29 +31,30 @@ class ItemOrderController extends Controller
     public function create()
     {
         //
-        $items = Item::pluck('name','id');
-        $orders=Order::pluck('id');
-        return view('itemOrder.create', compact('items','orders'));
+        $items = Item::pluck('name', 'id');
+        $orders = Order::pluck( 'account_id', 'id');
+        $qt = 0;
+        return view('itemOrder.create', compact('items', 'orders', 'qt'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(ItemOrdersRequest $request)
     {
         //
-return $request->all();
-        /*ItemOrder::create($request->all());
-        return redirect('/itemOrder');*/
+//        return $request->all();
+        ItemOrder::create($request->order_id,$request->item_id,$request->qt);
+        return redirect('/itemOrder');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -64,7 +65,7 @@ return $request->all();
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -75,8 +76,8 @@ return $request->all();
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -87,7 +88,7 @@ return $request->all();
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
