@@ -9,11 +9,16 @@ class Item extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
-      'name',
-      'price',
-      'stock'
+    protected $fillable = [
+        'name',
+        'price',
+        'stock',
+        'photo_id'
     ];
 
+    public function photo()
+    {
+        return $this->belongsTo(Photo::class);
+    }
 
 }

@@ -12,6 +12,9 @@
 {!! form::label('stock', 'Stock: ') !!}
 {!! form::number('stock', null) !!}
 
+{!! form::label('photo_id', 'Photo: ') !!}
+{!! form::file('photo_id', null) !!}
+
 {!! form::submit('Create Item') !!}
 {!! Form::close() !!}
 

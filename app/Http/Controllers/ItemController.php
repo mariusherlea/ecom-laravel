@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ItemsRequest;
 use App\Models\Item;
+use App\Models\Photo;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -39,8 +40,19 @@ class ItemController extends Controller
      */
     public function store(ItemsRequest $request)
     {
-        Item::create($request->all());
-        return redirect('/item');
+
+        $input=$request->all();
+
+        if($file = $request->file('photo_id')){
+           $name = time() . $file->getClientOriginalName();
+           $file->move('images', $name);
+           $photo = Photo::create(['file'=>$name]);
+           $input['photo_id'] = $photo->id;
+        }
+
+        Item::create($input);
+
+//        return redirect('/item');
     }
 
     /**
