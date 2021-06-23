@@ -52,7 +52,7 @@ class ItemController extends Controller
 
         Item::create($input);
 
-//        return redirect('/item');
+        return redirect('/item');
     }
 
     /**
@@ -75,6 +75,8 @@ class ItemController extends Controller
     public function edit($id)
     {
         //
+        $item = Item::findOrFail($id);
+        return view('item.edit', compact('item'));
     }
 
     /**

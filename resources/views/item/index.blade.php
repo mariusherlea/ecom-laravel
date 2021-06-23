@@ -13,6 +13,7 @@
     <thead>
     <tr>
         <th>Id</th>
+        <th>Photo</th>
         <th>Name</th>
         <th>Price</th>
         <th>Stock</th>
@@ -26,7 +27,8 @@
         @foreach($items as $item)
             <tr>
                 <td>{{$item->id}}</td>
-                <td>{{$item->name}}</td>
+                <td><img height="100" src="{{$item->photo ? $item->photo->file : "http://placehold.it/400x400"}}"></td>
+                <td><a href="{{route('item.edit',$item->id)}}"> {{$item->name}}</a></td>
                 <td>{{$item->price}}</td>
                 <td>{{$item->stock}}</td>
                 <td>{{$item->created_at->diffForHumans()}}</td>
